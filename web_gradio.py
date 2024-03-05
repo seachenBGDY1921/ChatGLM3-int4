@@ -74,10 +74,11 @@ application = LangChainApplication()
 result1 = application.get_llm_answer('请推荐苏州的三个最热门的景点？')
 print('\nresult of ChatGLM3:\n')
 print(result1)
-
+print('\n#############################################\n')
 
 application.knowledge_service.init_knowledge_base()
 result2 = application.get_knowledeg_based_answer('请推荐苏州的三个最热门的景点？')
+print('\n#############################################\n')
 print('\nresult of knowledge base:\n')
 print(result2)
 
