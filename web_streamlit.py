@@ -15,18 +15,18 @@ st.set_page_config(
 
 
 # 在类外定义一个新的缓存加载模型的函数
-@st.cache_resource
-def cached_load_model():
-    service = ChatGLMService()
-    service.load_model()
-    return service
+# @st.cache_resource
+# def cached_load_model():
+#     service = ChatGLMService()
+#     service.load_model()
+#     return service
 # 定义LangChainApplication类
 class LangChainApplication(object):
-
+    @st.cache_resource
     def __init__(self):
-        # self.llm_service = ChatGLMService()
-        # self.llm_service.load_model()
-        self.llm_service = cached_load_model()
+        self.llm_service = ChatGLMService()
+        self.llm_service.load_model()
+        # self.llm_service = cached_load_model()
 
         self.knowledge_service = KnowledgeService()
 
