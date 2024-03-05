@@ -115,8 +115,10 @@ class ChatGLMService(LLM):
             trust_remote_code=True
         )
         # self.model = AutoModel.from_pretrained(model_name_or_path, trust_remote_code=True).half().cuda()
+        # self.model = self.model.eval()
+
         self.model = AutoModel.from_pretrained(model_name_or_path, trust_remote_code=True, device_map="auto").quantize(4).eval()
-        self.model = self.model.eval()
+
 
         # self.model = load_model_on_gpus("THUDM/chatglm3-6b", num_gpus=2)
         # self.model = self.model.eval()
