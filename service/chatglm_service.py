@@ -108,7 +108,7 @@ class ChatGLMService(LLM):
         self.history = self.history + [history[-1]]  # 将问题和答案传到历史记录中
         return response
 
-    @st.cache(allow_output_mutation=True, hash_funcs={AutoTokenizer: id, Module: id})
+    @st.cache_resource(hash_funcs={AutoTokenizer: id, Module: id})
     def load_model(self,
                    model_name_or_path: str = "THUDM/chatglm3-6b"):
         self.tokenizer = AutoTokenizer.from_pretrained(
