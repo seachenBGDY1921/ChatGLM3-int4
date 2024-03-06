@@ -7,7 +7,7 @@ vector service
 
 import os
 # import nltk
-
+import streamlit as st
 # work_dir = '/kaggle'
 # nltk.data.path.append(os.path.join(work_dir, 'nltk_data'))
 
@@ -35,7 +35,7 @@ class KnowledgeService(object):
         self.embeddings = HuggingFaceEmbeddings(model_name='shibing624/text2vec-base-chinese', model_kwargs={'device': 'cpu'})
     #     与这个绝对路径无关
 
-
+    @st.cache(allow_output_mutation=True)
     def init_knowledge_base(self):
         """
         初始化本地知识库向量
@@ -110,6 +110,7 @@ class KnowledgeService(object):
             self.knowledge_base.add_documents(split_doc)
 
     #  下面这个函数没有被调用，这个应该是以及转化好的向量知识库保存的位置，可以直接调用，省去转化的步骤
+    @st.cache(allow_output_mutation=True)
     def load_knowledge_base(self, path):
         if path is None:
             self.knowledge_base = FAISS.load_local(self.knowledge_base_path, self.embeddings)
